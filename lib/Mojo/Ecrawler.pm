@@ -9,6 +9,7 @@ use warnings;
 
 our @ISA    = qw(Exporter);
 our @EXPORT = qw(geturlcontent getdiv);
+
 =head1 NAME
 
 Mojo::Ecrawler - A Eeay crawler for html page!
@@ -59,7 +60,7 @@ for(@ur){
 }
 
 =cut
-
+my $DEBUG=0;
 sub geturlcontent {
 my $feed = shift;
 my $ua   = Mojo::UserAgent->new;
