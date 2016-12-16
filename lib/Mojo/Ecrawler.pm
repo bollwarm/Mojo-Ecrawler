@@ -10,56 +10,54 @@ use warnings;
 our @ISA    = qw(Exporter);
 our @EXPORT = qw(geturlcontent getdiv);
 
+=encoding utf8
+
 =head1 NAME
 
 Mojo::Ecrawler - A Eeay crawler for html page!
 
 =head1 VERSION
 
-Version 0.001
+Version 0.02
 
 =cut
 
-our $VERSION = '0.001';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
     use Mojo::Ecrawler;
+    $lurl='http://www.oschina.net';
+    $re1="div.TodayNews";#scope tag
+    $re2="li a";# line tag
 
-    my $foo = Mojo::Ecrawler->new();
+   my $pcontent=geturlcontent($lurl);
+   my $pcout=getdiv($pcontent,$re1,$re2);
+   print $pcout;
     ...
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+=head2  getulcontent()
 
-=head1 SUBROUTINES/METHODS
+Using Mojo::UserAgent to get the page content。
+ 
+ IN: $url,the page's url.
+ OUT:Mojo dom object .
 
+=head2  getdiv()
 
-=pod
+Get content of  filter using Mojo:DOM
 
-采集数据入库
-my @ur=(1..302);
-#my @ur=(150..152);
+ IN:1,Mojo dom object;
+    2,$re1: scope tag(div.xxx div#xxx div xx ..).
+    3,$rel: line tag(a hi ..)；
 
-#open my $ZFD,'>',"DATA" or die;
-
-#=pod
-for(@ur){
-
- #print $ZFD $pcontent;
- print $pcontent;
-  print "get $lurl  ok \n";
-
-}
+ OUT: the final content. 
 
 =cut
+
 my $DEBUG=0;
 sub geturlcontent {
 my $feed = shift;
