@@ -23,7 +23,7 @@ for(@ur){
 my ($lurl,$re1,$re2)=@ARGV;
 
   $lurl='http://www.oschina.net';
-  $re1="div.TodayNews";
+  $re1="div#IndustryNews ul.p1";
   $re2="li a";
   my $pcontent=geturlcontent($lurl);
   my $pcout1=getdiv($pcontent,$re1,$re2);
