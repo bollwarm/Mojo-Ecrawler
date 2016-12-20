@@ -72,10 +72,10 @@ return  $result->res->dom;
 
 sub getdiv {
 
-my ($dom,$re1,$re2)=@_;
+my ($dom,$re1,$re2,$ind)=@_;
 my $recontent;
 my @div = $dom->find($re1)->each;
-   $recontent.=getndiv($_,$re2) for(@div);
+   $recontent.=getndiv($_,$re2,$ind) for(@div);
 print "DEBUG:getndiv()\::OUT:\n",$recontent if $DEBUG;;
 return  $recontent;
 }

@@ -26,7 +26,7 @@ my ($lurl,$re1,$re2)=@ARGV;
   $re1="div#IndustryNews ul.p1";
   $re2="li a";
   my $pcontent=geturlcontent($lurl);
-  my $pcout1=getdiv($pcontent,$re1,$re2);
+  my $pcout1=getdiv($pcontent,$re1,$re2,1);
   print $pcout1;
   print "get $lurl  ok \n";
 

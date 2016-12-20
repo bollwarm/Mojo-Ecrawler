@@ -15,7 +15,7 @@ my ($lurl,$re1,$re2);
   $re2="dl";
   my $pcontent=geturlcontent($lurl);
   
-  my @tile=split /\n/ms,getdiv($pcontent,$re1,"dt a");
+  my @tile=split /\n/ms,getdiv($pcontent,$re1,"dt a",1);
   my @source=split /\n/ms, getdiv($pcontent,$re1,"dd.jobs-source a");
   my @time=split /\n/ms, getdiv($pcontent,$re1,"dd.jobs-time");
   my @city=split /\n/ms, getdiv($pcontent,$re1,"dd.jobs-place");
