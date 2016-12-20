@@ -24,7 +24,7 @@ To install this module, run the following commands:
     $re2="li a";#内容行特征
  
     my $pcontent=geturlcontent($lurl);
-    my $pcout1=getdiv($pcontent,$re1,$re2);
+    my $pcout1=getdiv($pcontent,$re1,$re2,1);
     print $pcout1;
 
 ## Result 结果展示

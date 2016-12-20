@@ -8,7 +8,7 @@ use strict;
 use warnings;
 
 our @ISA    = qw(Exporter);
-our @EXPORT = qw(geturlcontent getdiv);
+our @EXPORT = qw(geturlcontent getdiv gettext);
 
 =encoding utf8
 
@@ -18,11 +18,11 @@ Mojo::Ecrawler - A Eeay crawler for html page!
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 SYNOPSIS
@@ -83,15 +83,27 @@ return  $recontent;
 sub getndiv {
 
 #my $DEBUG=1;
-my ($st,$re)=@_;
+my ($st,$re,$ind)=@_;
 my $ndom=gmyc($st);
 my @ndiv = $ndom->find($re)->each;
 my $nrecontent;
    for(@ndiv){
    $nrecontent.=$_->content;
-   $nrecontent.="  ".$_->attr->{href};
+   $nrecontent.="  ".$_->attr->{href} if $ind;
    $nrecontent.="\n";
 }
+print "DEBUG:getndiv()\::OUT:\n",$nrecontent if $DEBUG;
+return $nrecontent;
+
+}
+
+sub gettext {
+
+#my $DEBUG=1;
+my ($st,$re)=@_;
+my $ndom=gmyc($st);
+my  $nrecontent = $ndom->all_text;
+    $nrecontent.="\n";
 print "DEBUG:getndiv()\::OUT:\n",$nrecontent if $DEBUG;
 return $nrecontent;
 
