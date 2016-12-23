@@ -24,7 +24,6 @@ Version 0.03
 
 our $VERSION = '0.03';
 
-
 =head1 SYNOPSIS
 
     use Mojo::Ecrawler;
@@ -58,66 +57,67 @@ Get content of  filter using Mojo:DOM
 
 =cut
 
-my $DEBUG=0;
+my $DEBUG = 0;
+
 sub geturlcontent {
-my $feed = shift;
-my $ua   = Mojo::UserAgent->new;
-$ua->transactor->name( 'Mozilla/5.0 (Macintosh; '
-      . 'Intel Mac OS X 10_8_5) AppleWebKit/537.36 '
-      . '(KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36' );
-my $recontent;
-my $result=($ua->get($feed));
-return  $result->res->dom;
+    my $feed = shift;
+    my $ua   = Mojo::UserAgent->new;
+    $ua->transactor->name( 'Mozilla/5.0 (Macintosh; '
+          . 'Intel Mac OS X 10_8_5) AppleWebKit/537.36 '
+          . '(KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36' );
+    my $recontent;
+    my $result = ( $ua->get($feed) );
+    return $result->res->dom;
 }
 
 sub getdiv {
 
-my ($dom,$re1,$re2,$ind)=@_;
-my $recontent;
-my @div = $dom->find($re1)->each;
-   $recontent.=getndiv($_,$re2,$ind) for(@div);
-print "DEBUG:getndiv()\::OUT:\n",$recontent if $DEBUG;;
-return  $recontent;
+    my ( $dom, $re1, $re2, $ind ) = @_;
+    my $recontent;
+    my @div = $dom->find($re1)->each;
+    $recontent .= getndiv( $_, $re2, $ind ) for (@div);
+    print "DEBUG:getndiv()\::OUT:\n", $recontent if $DEBUG;
+    return $recontent;
 }
 
 sub getndiv {
 
-#my $DEBUG=1;
-my ($st,$re,$ind)=@_;
-my $ndom=gmyc($st);
-my @ndiv = $ndom->find($re)->each;
-my $nrecontent;
-   for(@ndiv){
-   $nrecontent.=$_->content;
-   $nrecontent.="  ".$_->attr->{href} if $ind;
-   $nrecontent.="\n";
-}
-print "DEBUG:getndiv()\::OUT:\n",$nrecontent if $DEBUG;
-return $nrecontent;
+    #my $DEBUG=1;
+    my ( $st, $re, $ind ) = @_;
+    my $ndom = gmyc($st);
+    my @ndiv = $ndom->find($re)->each;
+    my $nrecontent;
+    for (@ndiv) {
+        $nrecontent .= $_->content;
+        $nrecontent .= "  " . $_->attr->{href} if $ind;
+        $nrecontent .= "\n";
+    }
+    print "DEBUG:getndiv()\::OUT:\n", $nrecontent if $DEBUG;
+    return $nrecontent;
 
 }
 
 sub gettext {
 
-#my $DEBUG=1;
-my ($st,$re)=@_;
-my $ndom=gmyc($st);
-my  $nrecontent = $ndom->all_text;
-    $nrecontent.="\n";
-print "DEBUG:getndiv()\::OUT:\n",$nrecontent if $DEBUG;
-return $nrecontent;
+    #my $DEBUG=1;
+    my ( $st, $re ) = @_;
+    my $ndom       = gmyc($st);
+    my $nrecontent = $ndom->all_text;
+    $nrecontent .= "\n";
+    print "DEBUG:getndiv()\::OUT:\n", $nrecontent if $DEBUG;
+    return $nrecontent;
 
 }
 
 sub gmyc {
 
-  my ($c,$s)=@_;
-  my $dom =$s ? Mojo::DOM->new($c)->at($s): Mojo::DOM->new($c);
-#  say Dump($dom);
-  return $dom;
+    my ( $c, $s ) = @_;
+    my $dom = $s ? Mojo::DOM->new($c)->at($s) : Mojo::DOM->new($c);
+
+    #  say Dump($dom);
+    return $dom;
 
 }
-
 
 =head1 AUTHOR
 
@@ -174,4 +174,4 @@ This program is released under the following license: Perl
 
 =cut
 
-1; # End of Mojo::Ecrawler
+1;    # End of Mojo::Ecrawler

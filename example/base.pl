@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use Mojo::Ecrawler;
+
 =pod
 
 采集数据入库
@@ -20,13 +21,13 @@ for(@ur){
 
 =cut
 
-my ($lurl,$re1,$re2)=@ARGV;
+my ( $lurl, $re1, $re2 ) = @ARGV;
 
-  $lurl='http://www.oschina.net';
-  $re1="div#IndustryNews ul.p1";
-  $re2="li a";
-  my $pcontent=geturlcontent($lurl);
-  my $pcout1=getdiv($pcontent,$re1,$re2,1);
-  print $pcout1;
-  print "get $lurl  ok \n";
+$lurl = 'http://www.oschina.net';
+$re1  = "div#IndustryNews ul.p1";
+$re2  = "li a";
+my $pcontent = geturlcontent($lurl);
+my $pcout1 = getdiv( $pcontent, $re1, $re2, 1 );
+print $pcout1;
+print "get $lurl  ok \n";
 
