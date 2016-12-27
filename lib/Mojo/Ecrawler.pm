@@ -97,6 +97,11 @@ sub getndiv {
 
 }
 
+sub oplink {
+...
+
+
+}
 sub gettext {
 
     #my $DEBUG=1;
