@@ -31,6 +31,8 @@ To install this module, run the following commands:
 
 ###抓取oschina资讯部分的实例
 
+    perl example/oschinanews.pl
+
     阿里巴巴向 Apache 基金会捐赠移动开发框架 Weex  /news/80036/alibaba-donate-weex-to-apache-foundation
     雅虎第二次大规模数据泄露 超过 10 亿帐户被盗  /news/80033/yahoo-data-leaked-twice
     众包平台上线“店铺”功能，打造用户的服务品牌  https://my.oschina.net/u/3109498/blog/806241
@@ -76,7 +78,6 @@ To install this module, run the following commands:
                                                      1、精通PHP MySQL开发，熟悉Ajax、JavaScript、 Flash、CSS、Html；&lt;br&gt;2、精通关系数据库MySQL，熟悉SQL语言，并掌握windows环境下开发经验；&amp;l...
 
 ##SUPPORT AND DOCUMENTATION 
-
 After installing, you can find documentation for this module with the
 perldoc command.
 
