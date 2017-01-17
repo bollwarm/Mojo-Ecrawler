@@ -104,7 +104,6 @@ sub oplink {
 }
 sub gettext {
 
-    #my $DEBUG=1;
     my ( $st, $re ) = @_;
     my $ndom       = gmyc($st);
     my $nrecontent = $ndom->all_text;
@@ -118,8 +117,6 @@ sub gmyc {
 
     my ( $c, $s ) = @_;
     my $dom = $s ? Mojo::DOM->new($c)->at($s) : Mojo::DOM->new($c);
-
-    #  say Dump($dom);
     return $dom;
 
 }
