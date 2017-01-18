@@ -28,7 +28,6 @@ $lurl = 'http://www.gzbz.com.cn/dead_men/index.asp?page=2';
 $re1  = "table.t1";
 $re2  = "td div";
 my $pcontent = geturlcontent($lurl);
-#print Dumper($pcontent);
 my $pcout1 = getdiv( $pcontent, $re1, $re2,1);
 my $line = encode("utf-8",decode("gbk",$pcout1));
 print $line;
