@@ -107,8 +107,10 @@ sub gettext {
     my ( $st, $re ) = @_;
     my $ndom       = gmyc($st);
     my $nrecontent = $ndom->all_text;
+   
     $nrecontent .= "\n";
     print "DEBUG:getndiv()\::OUT:\n", $nrecontent if $DEBUG;
+   
     return $nrecontent;
 
 }
