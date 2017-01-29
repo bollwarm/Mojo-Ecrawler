@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use Mojo::Ecrawler;
-
+binmode(STDOUT, ":encoding(utf8)");
 =pod
 
 采集数据入库
@@ -24,8 +24,8 @@ for(@ur){
 my ( $lurl, $re1, $re2 ) = @ARGV;
 
 $lurl = 'http://www.oschina.net';
-$re1  = "div#IndustryNews ul.p1";
-$re2  = "li a";
+$re1  = "div.page";
+$re2  = "a.is-today";
 my $pcontent = geturlcontent($lurl);
 my $pcout1 = getdiv( $pcontent, $re1, $re2, 1 );
 print $pcout1;
