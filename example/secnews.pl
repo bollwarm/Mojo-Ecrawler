@@ -1,8 +1,7 @@
 #!/usr/bin/perl
 
 use Mojo::Ecrawler;
-use Data::Dumper;
-use Encode;
+
 =pod
 
 采集数据入库
@@ -24,12 +23,12 @@ for(@ur){
 
 my ( $lurl, $re1, $re2 ) = @ARGV;
 
-$lurl = 'http://www.gzbz.com.cn/dead_men/index.asp?page=2';
-$re1  = "table.t1";
-$re2  = "td div";
+$lurl = 'http://www.cert.org.cn/publish/main/9/index.html';
+$re1  = "div.con_list";
+$re2  = "a";
 my $pcontent = geturlcontent($lurl);
-my $pcout1 = getdiv( $pcontent, $re1, $re2,1);
-my $line = encode("utf-8",decode("gbk",$pcout1));
-print $line;
+my $pcout1 = getdiv( $pcontent, $re1, $re2, 1 );
+print $pcontent,"\n";
+print $pcout1;
 print "get $lurl  ok \n";
 
