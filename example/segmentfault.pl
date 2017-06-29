@@ -1,25 +1,8 @@
 #!/usr/bin/perl
 
 use Mojo::Ecrawler;
+binmode STDOUT, ":utf8";
 
-=pod
-
-采集数据入库
-my @ur=(1..302);
-#my @ur=(150..152);
-
-#open my $ZFD,'>',"DATA" or die;
-
-#=pod
-for(@ur){
-
- #print $ZFD $pcontent;
- print $pcontent;
-  print "get $lurl  ok \n";
-
-}
-
-=cut
 
 my ( $lurl, $re1, $re2 ) = @ARGV;
 

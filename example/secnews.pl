@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use Mojo::Ecrawler;
-
+binmode STDOUT, ":utf8";
 =pod
 
 采集数据入库
@@ -25,10 +25,24 @@ my ( $lurl, $re1, $re2 ) = @ARGV;
 
 $lurl = 'http://www.cert.org.cn/publish/main/9/index.html';
 $re1  = "div.con_list";
-$re2  = "a";
+$re2  = "ul li a";
 my $pcontent = geturlcontent($lurl);
-my $pcout1 = getdiv( $pcontent, $re1, $re2, 1 );
-print $pcontent,"\n";
-print $pcout1;
+my @date,@urls,@title;
+my $pcout1 = getdiv( $pcontent, $re1, $re2);
+my $surl =getdiv( $pcontent, $re1, "ul li");
+my @surl=(split /\n/sm,$surl);
+   @title=(split /\n/sm,$pcout1);
+for(@surl) {
+
+push @date,$1 if /\<span\>\[(.*)\]\<\/span\>/;
+push @urls,$1 if /open\(&quot;(.*)&quot;\)/;
+
+}
+
+for(0..$#title) {
+
+  print "$date[$_] $title[$_] ",'http://www.cert.org.cn',$urls[$_],"\n";
+
+}
 print "get $lurl  ok \n";
 
