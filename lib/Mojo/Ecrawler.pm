@@ -58,9 +58,10 @@ Get content of  filter using Mojo:DOM
 =cut
 
 my $DEBUG = 0;
-
+my $host;
 sub geturlcontent {
     my $feed = shift;
+    $host= $1 if $feed=~/(http:\/\/[^\/]*)\//;
     my $ua   = Mojo::UserAgent->new;
     $ua->transactor->name( 'Mozilla/5.0 (Macintosh; '
           . 'Intel Mac OS X 10_8_5) AppleWebKit/537.36 '
@@ -89,7 +90,9 @@ sub getndiv {
     my $nrecontent;
     for (@ndiv) {
         $nrecontent .= $_->content;
-        $nrecontent .= "  " . $_->attr->{href} if $ind;
+        my $surl=$_->attr->{href} if $ind;
+           $surl =  $host.$surl  unless $surl=~/https?:/;
+        $nrecontent .= $surl;
         $nrecontent .= "\n";
     }
     print "DEBUG:getndiv()\::OUT:\n", $nrecontent if $DEBUG;
