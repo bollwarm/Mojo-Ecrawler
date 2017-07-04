@@ -91,7 +91,7 @@ sub getndiv {
     for (@ndiv) {
         $nrecontent .= $_->content;
         my $surl=$_->attr->{href} if $ind;
-           $surl =  $host.$surl  unless $surl=~/https?:/;
+       #    $surl =  $host.$surl  unless $surl=~/https?:/;
         $nrecontent .= $surl;
         $nrecontent .= "\n";
     }
