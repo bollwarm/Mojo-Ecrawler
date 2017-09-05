@@ -18,11 +18,11 @@ Mojo::Ecrawler - A Eeay crawler for html page!
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
@@ -76,7 +76,11 @@ sub getdiv {
     my ( $dom, $re1, $re2, $ind ) = @_;
     my $recontent;
     my @div = $dom->find($re1)->each;
-    $recontent .= getndiv( $_, $re2, $ind ) for (@div);
+    for (@div){
+
+    $recontent .= getndiv( $_, $re2, $ind ) if getndiv( $_, $re2, $ind );
+
+    }
     print "DEBUG:getndiv()\::OUT:\n", $recontent if $DEBUG;
     return $recontent;
 }
@@ -92,7 +96,7 @@ sub getndiv {
         $nrecontent .= $_->content;
         my $surl=$_->attr->{href} if $ind;
        #    $surl =  $host.$surl  unless $surl=~/https?:/;
-        $nrecontent .= $surl;
+        $nrecontent .= $surl if $surl;
         $nrecontent .= "\n";
     }
     print "DEBUG:getndiv()\::OUT:\n", $nrecontent if $DEBUG;
