@@ -96,7 +96,7 @@ sub getndiv {
         $nrecontent .= $_->content;
         my $surl=$_->attr->{href} if $ind;
        #    $surl =  $host.$surl  unless $surl=~/https?:/;
-        $nrecontent .= $surl if $surl;
+        $nrecontent .= " ".$surl if $surl;
         $nrecontent .= "\n";
     }
     print "DEBUG:getndiv()\::OUT:\n", $nrecontent if $DEBUG;
