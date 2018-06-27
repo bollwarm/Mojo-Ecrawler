@@ -1,36 +1,57 @@
 #!/usr/bin/perl
 
 use Mojo::Ecrawler;
-use Encode;
-use utf8;
-
 my $key=shift;
 open $collegeData,'<','collegeData';
 my @schurl=<$collegeData>;
-my $url;
+
+my $rschool;
+my $schoolinfo;
 
 for(@schurl) {
-$url.=$_ if /$key/;
-}
+next if /#^/;
+next if /^\s*$/;
+my ($sname,$surl)=split;
 
-my @shools=split '\n',$url;
-
-if($shools[1]){
-
-for(@shools) {
-my $name=(split)[0];
-print "$name ";
-}
-
-}else{
-
-my $surl=(split " ",$url)[1];
-
-print Sccore($surl) if $surl;
+#print "$sname:$surl\n";
+#print "$sname:$surl\n" if $surl;
+$rschool->{$sname}=$surl if $surl;
 
 }
 
+print Sseach($key);
+#print $rschool->{$_},"$_ DDD\n" for(keys %{$rschool});
+sub Sseach {
+
+my $result;
+my $key=shift;
+
+if (exists $schoolinfo->{$key}) {
+$result=$schoolinfo->{$key} 
+} else {
+
+if (exists $rschool->{$key}) {
+
+$result= Sccore($rschool->{$key});
+$schoolinfo->{$rschool->{$key}}=$result;
+
+} else {
+
+for(keys %{$rschool}) {
+
+$result.=" $_" if /$key/;
+
+ }
+}
+
+}
+return $result;
+}
 sub Sccore {
+
+use Encode qw(decode encode);
+use utf8;
+
 my $DUBEG=0;
 my $lurl=shift;
 print "DEBUG $lurl" if $DUBEG;
@@ -46,6 +67,7 @@ print "DDXX ",$sscore[1],"XXDD" if $DUBEG;
 
 my $score1="年份|最高分|平均分|最低分|省控线|批次\n";
 $result="招办电话|电子邮箱|通讯地址|招生网址\n\n".$result;
+
 #print "DD $_\n" for(@sscore);
 
 for(@sscore){
@@ -59,6 +81,11 @@ s#(20\d\d)#\n\1年#;
 $score1.="|$_";
 #$i++;
 }
+
+$result=encode 'utf8',$result;
+$score1=encode 'utf8',$score1;
+
 return "$result\n$score1\n";
+
 }
 
