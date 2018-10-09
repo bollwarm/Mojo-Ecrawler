@@ -54,7 +54,27 @@ use utf8;
 
 my $DUBEG=0;
 my $lurl=shift;
-print "DEBUG $lurl" if $DUBEG;
+my $WLI=1;
+my $provinceset=1;
+my $provinceCode="10003";
+
+if($WLI){
+ $lurl=~s#/10035/#/10034/#;
+
+}
+
+if($provinceset){
+
+ my @url=split '/',$lurl;
+ print "@url \n";
+ $url[6]=$provinceCode if $provinceCode;
+ my $llurl;
+    $llurl.="$_/" for(@url);
+    $llurl=~s#/$##;
+    $lurl=$llurl;
+}
+
+print "DEBUG $lurl";
 my $pcontent = geturlcontent($lurl);
 print "DEBUG $pcontent" if $DUBEG;
 
