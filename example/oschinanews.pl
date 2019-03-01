@@ -23,9 +23,9 @@ for(@ur){
 
 my ( $lurl, $re1, $re2 ) = @ARGV;
 
-$lurl = 'http://www.oschina.net';
+$lurl = 'https://www.oschina.net';
 $re1  = "div.page";
-$re2  = "a.is-today";
+$re2  = "a.news-link";
 my $pcontent = geturlcontent($lurl);
 my $pcout1 = getdiv( $pcontent, $re1, $re2, 1 );
 print $pcout1;

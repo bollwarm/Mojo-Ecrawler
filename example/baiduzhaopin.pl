@@ -11,9 +11,9 @@ binmode( STDOUT, ':encoding(utf8)' );
 my ( $lurl, $re1, $re2 );
 my $language = shift;
 $language //= "perl";
-$lurl = 'http://zhaopin.baidu.com/quanzhi?query=' . $language;
-$re1  = "div#feed-list";
-$re2  = "a";
+$lurl = 'https://zhaopin.baidu.com/quanzhi?query=' . $language;
+$re1  = "div.listpage";
+$re2  = "div";
 my $pcontent = geturlcontent($lurl);
 
 my $urls=getdiv( $pcontent, $re1,"a",1),"\n";
